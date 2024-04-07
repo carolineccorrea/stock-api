@@ -48,7 +48,7 @@ router.put(
 router.get(
   "/categories",
   isAuthenticated,
-  new ListCategoriesController().handle
+  handleController(ListCategoriesController)
 );
 router.delete(
   "/category/delete",
