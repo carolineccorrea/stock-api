@@ -53,7 +53,7 @@ router.get(
 router.delete(
   "/category/delete",
   isAuthenticated,
-  new DeleteCategoryController().handle
+ handleController(DeleteCategoryController)
 );
 
 /* PRODUCT */

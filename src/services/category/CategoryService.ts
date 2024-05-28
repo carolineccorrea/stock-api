@@ -23,6 +23,25 @@ class CategoryService {
     });
     return categories;
   }
+
+  async find(categoryId: string) {
+    const categories = await prismaClient.category.findFirst({
+      where: {
+        id: categoryId,
+      },
+    });
+
+    return categories;
+  }
+
+  async delete(categoryId: string){
+      const category = await prismaClient.category.delete({
+        where: {
+          id: categoryId,
+        },
+      });
+      return category;
+  }
 }
 
 export { CategoryService };

@@ -1,12 +1,18 @@
-import { Request, Response } from "express";
-import { DeleteCategoryService } from "../../services/category/DeleteCategoryService";
+import { Request, Response, request, response } from "express";
+import { IController } from "../protocols/IController";
+import { inject, injectable } from "tsyringe";
+import { DeleteCategoryUseCase } from "../../usecases/category/DeleteCategoryUseCase";
 
-class DeleteCategoryController {
-  async handle(request: Request, response: Response) {
-    const category_id = request.query.category_id as string;
-    const removeCategoryService = new DeleteCategoryService();
-    const category = removeCategoryService.execute(category_id);
-    return response.json(category);
+@injectable()
+class DeleteCategoryController implements IController {
+  constructor(
+    @inject(DeleteCategoryUseCase) private deleteCategoryUseCase: DeleteCategoryUseCase
+  ) {}
+  async handle(req: Request, res: Response): Promise<void> {
+    const categoryId = req.query.categoryId as string;
+
+    const category = this.deleteCategoryUseCase.execute(categoryId)
+    res.json(category);
   }
 }
 
