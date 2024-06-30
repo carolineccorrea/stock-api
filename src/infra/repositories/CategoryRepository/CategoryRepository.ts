@@ -1,6 +1,7 @@
-import prismaClient from "../../prisma/index";
+import { EditCategoryRequest } from "../../../models/interfaces/category/EditCategoryRequest";
+import prismaClient from "../../../prisma/index";
 
-class CategoryService {
+class CategoryRepository {
   async create(name: string) {
     const category = await prismaClient.category.create({
       data: {
@@ -42,6 +43,18 @@ class CategoryService {
       });
       return category;
   }
+
+  async edit(name: string, categoryId: string) {
+    const productEdited = await prismaClient.category.update({
+      where: {
+        id: categoryId,
+      },
+      data: {
+        name: name,
+      },
+    });
+    return productEdited;
+  }
 }
 
-export { CategoryService };
+export { CategoryRepository };

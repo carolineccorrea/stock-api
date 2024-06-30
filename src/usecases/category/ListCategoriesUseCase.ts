@@ -1,13 +1,13 @@
 import { injectable } from "tsyringe";
-import { CategoryService } from "../../services/category/CategoryService";
+import { CategoryRepository } from "../../infra/repositories/CategoryRepository/CategoryRepository";
 
 @injectable()
 export class ListCategoriesUseCase {
-  constructor(private categoryService: CategoryService) {}
+  constructor(private categoryRepo: CategoryRepository) {}
 
     async execute(): Promise<any> {
       try {
-        return this.categoryService.list()
+        return this.categoryRepo.list()
       } catch (error) {
         return error;
       }

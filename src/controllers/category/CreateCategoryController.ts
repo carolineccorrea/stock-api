@@ -17,6 +17,6 @@ class CreateCategoryController implements IController {
     } catch (error) {
       res.status(500).send({ error: error.message });
     }
- }
+  }
 }
 export { CreateCategoryController };

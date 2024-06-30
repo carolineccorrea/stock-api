@@ -1,14 +1,22 @@
 import { Request, Response } from "express";
-import { EditCategoryService } from "../../services/category/EditCategoryService";
+import { IController } from "../protocols/IController";
+import { inject, injectable } from "tsyringe";
+import { EditCategoryUseCase } from "../../usecases/category/EditCategoryUseCase";
 
-class EditCategoryController {
-  async handle(request: Request, response: Response) {
-    const { name } = request.body;
-    const category_id = request.query.category_id as string;
-    const editCategoryService = new EditCategoryService();
-    const categoryEdited = editCategoryService.execute({ name, category_id });
-    return response.json(categoryEdited);
-  }
+@injectable()
+class EditCategoryController implements IController {
+  constructor(
+    @inject(EditCategoryUseCase) private editCategoryUseCase: EditCategoryUseCase
+  ) {}
+
+  async handle(req: Request, res: Response): Promise<void> {
+    try {
+      const { name, categoryId } = req.body;
+      const edited = await this.editCategoryUseCase.execute(name, categoryId)
+      res.json(edited);
+    } catch (error) {
+      res.status(500).send({ error: error.message });
+    }
+ }
 }
-
 export { EditCategoryController };

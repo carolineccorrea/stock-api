@@ -28,14 +28,6 @@ const router = Router();
 router.post("/user", new CreateUserController().handle);
 router.post("/auth", new AuthUserController().handle);
 
-/*
-router.post(
-  "/category",
-  isAuthenticated,
-  handleController(ListCustomersController)
-);
-*/
-
 router.post("/category",
  handleController(CreateCategoryController)
 );
@@ -43,7 +35,7 @@ router.post("/category",
 router.put(
   "/category/edit",
   isAuthenticated,
-  new EditCategoryController().handle
+  handleController(EditCategoryController)
 );
 router.get(
   "/categories",
