@@ -19,7 +19,7 @@ class CustomerService {
     return customers;
   }
   
-  async create({ name, email, cpf, cnpj, branchCode, branchId }: CreateCustomer) {
+  async create({ name, email, cpf, cnpj, address, phone, dateBirth, branchCode, branchId }: CreateCustomer) {
 
     const customer = await prismaClient.customer.create({
       data: {
@@ -27,6 +27,9 @@ class CustomerService {
         email: email,
         cpf: cpf,
         cnpj: cnpj,
+        phone: phone,
+        address: address,
+        dateBirth: dateBirth,
         branchCode: branchCode,
         branchId: branchId
       },

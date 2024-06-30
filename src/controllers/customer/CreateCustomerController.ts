@@ -12,13 +12,13 @@ class CreateCustomerController implements IController {
 
   async handle(req: Request, res: Response): Promise<void> {
     try {
-      const { name, email, cpf, cnpj, branchCode, branchId }: CreateCustomer = req.body;
+      const { name, email, cpf, cnpj, address, phone, dateBirth, branchCode, branchId }: CreateCustomer = req.body;
       if (!cpf && !cnpj && !email) {
         res.status(400).send({ error: 'Campo CPF, CNPJ ou EMAIL deve ser preenchido.' });
         return;
       }
 
-      const customer = await this.createCustomerUseCase.execute({ name, email, cpf, cnpj, branchCode, branchId });
+      const customer = await this.createCustomerUseCase.execute({ name, email, cpf, cnpj, branchCode, branchId, address, phone, dateBirth });
 
       if (!customer) {
         res.status(400).json(customer.error);

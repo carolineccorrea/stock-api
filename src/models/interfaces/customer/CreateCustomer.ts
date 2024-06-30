@@ -8,6 +8,8 @@ export interface CreateCustomer {
   address?: string;
   neighborhood?: string;
   city?: string;
+  phone?: string;
+  dateBirth?: string;
   created_at?: Date;
   updated_at?: Date;
   orders?: any[];

@@ -65,6 +65,8 @@ model Customer {
   cpf           String?
   cnpj          String?
   address       String?
+  phone         String?
+  dateBirth     String?
   neighborhood  String?
   city          String?
   created_at    DateTime?      @default(now())
